@@ -52,6 +52,10 @@ module Chatwoot
     # https://discuss.rubyonrails.org/t/cve-2022-32224-possible-rce-escalation-bug-with-serialized-columns-in-active-record/81017
     # FIX ME : fixes breakage of installation config. we need to migrate.
     config.active_record.yaml_column_permitted_classes = [ActiveSupport::HashWithIndifferentAccess]
+
+    config.action_dispatch.default_headers ={
+      "X-Frame-Options" => 'ALLOW-FROM https://localhost:8084/'
+    }
   end
 
   def self.config
