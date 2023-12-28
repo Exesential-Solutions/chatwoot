@@ -54,7 +54,7 @@ module Chatwoot
     config.active_record.yaml_column_permitted_classes = [ActiveSupport::HashWithIndifferentAccess]
 
     config.action_dispatch.default_headers ={
-      "X-Frame-Options" => 'ALLOW-FROM https://localhost:8084/'
+      "Content-Security-Policy" => 'frame-ancestors https://*.exesential.com'
     }
   end
 
