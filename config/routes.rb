@@ -78,7 +78,7 @@ Rails.application.routes.draw do
           namespace :channels do
             resource :twilio_channel, only: [:create]
           end
-          resources :conversations, only: [:index, :create, :show] do
+          resources :conversations, only: [:index, :create, :show, :update] do
             collection do
               get :meta
               get :search
@@ -95,6 +95,7 @@ Rails.application.routes.draw do
               resources :labels, only: [:create, :index]
               resource :participants, only: [:show, :create, :update, :destroy]
               resource :direct_uploads, only: [:create]
+              resource :draft_messages, only: [:show, :update, :destroy]
             end
             member do
               post :mute
@@ -124,7 +125,7 @@ Rails.application.routes.draw do
               get :search
               post :filter
               post :import
-              get :export
+              post :export
             end
             member do
               get :contactable_inboxes
@@ -139,6 +140,12 @@ Rails.application.routes.draw do
             end
           end
           resources :csat_survey_responses, only: [:index] do
+            collection do
+              get :metrics
+              get :download
+            end
+          end
+          resources :applied_slas, only: [:index] do
             collection do
               get :metrics
               get :download
@@ -387,6 +394,7 @@ Rails.application.routes.draw do
   end
 
   get 'hc/:slug', to: 'public/api/v1/portals#show'
+  get 'hc/:slug/sitemap.xml', to: 'public/api/v1/portals#sitemap'
   get 'hc/:slug/:locale', to: 'public/api/v1/portals#show'
   get 'hc/:slug/:locale/articles', to: 'public/api/v1/portals/articles#index'
   get 'hc/:slug/:locale/categories', to: 'public/api/v1/portals/categories#index'

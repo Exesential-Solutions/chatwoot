@@ -18,6 +18,7 @@ class DashboardController < ActionController::Base
       'LOGO', 'LOGO_DARK', 'LOGO_THUMBNAIL',
       'INSTALLATION_NAME',
       'WIDGET_BRAND_URL', 'TERMS_URL',
+      'BRAND_URL', 'BRAND_NAME',
       'PRIVACY_URL',
       'DISPLAY_MANIFEST',
       'CREATE_NEW_ACCOUNT_FROM_DASHBOARD',
@@ -57,7 +58,7 @@ class DashboardController < ActionController::Base
       FB_APP_ID: GlobalConfigService.load('FB_APP_ID', ''),
       FACEBOOK_API_VERSION: GlobalConfigService.load('FACEBOOK_API_VERSION', 'v17.0'),
       IS_ENTERPRISE: ChatwootApp.enterprise?,
-      AZURE_APP_ID: ENV.fetch('AZURE_APP_ID', ''),
+      AZURE_APP_ID: GlobalConfigService.load('AZURE_APP_ID', ''),
       GIT_SHA: GIT_HASH
     }
   end
